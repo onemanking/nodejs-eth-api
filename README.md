@@ -1,7 +1,7 @@
 # nodejs-eth
 
 1. npm i
-2. create .env to setup env
+2. touch .env to create .env file to setup env
 3. npm start
 4. use postman
     - GET : http://localhost:{config.port}/v1/wallet/getBalance/?walletAddress=YOURADDRESS : to get wallet balance

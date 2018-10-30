@@ -1,11 +1,9 @@
 import config from '../config'
 import Web3 from 'web3'
 import axios from 'axios'
-import { start } from 'repl';
 
 const networkToUse = `https://${config.network}.infura.io/v3/${config.apiKey}`
 const web3 = new Web3(new Web3.providers.HttpProvider(networkToUse))
-const chainId = config.network === 'mainnet' ? 1 : 2 
 
 const getCurrentGasPrice = async isParseToWei => {
     const response = await axios.get('https://ethgasstation.info/json/ethgasAPI.json')
