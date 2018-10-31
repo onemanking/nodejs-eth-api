@@ -2,11 +2,19 @@
 
 1. npm i
 2. touch .env to create .env file to setup env
+    ```js
+    API_KEY = 'INFURA API KEY'
+    NETWORK = 'ropsten'
+    PORT = 3000
+    PRIVATE_KEY = 'PRIVATE KEY'
+    KEYSTORE = JSON OBJECT KEYSTORE V3 
+    PASSWORD = 'KEYSTORE PASSWORD'
+    ````
 3. npm start
 4. use postman
-    - GET : http://localhost:{config.port}/v1/wallet/getBalance/?walletAddress=YOURADDRESS : to get wallet balance
-    - GET : http://localhost:{config.port}/v1/ether/getGasPrice : to get current gas price
-    - POST : http://localhost:{config.port}/v1/wallet/sendEth require rawBody with keystoreV3, password, addressList and amount : to send ether with Keystore
+    - GET : /v1/wallet/getBalance/?walletAddress=YOURADDRESS : to get wallet balance
+    - GET : /v1/ether/getGasPrice : to get current gas price
+    - POST : /v1/wallet/sendEth require body with keystoreV3, password, addressList and amount : to send ether with Keystore
     ```js
     { 
         "keystore": {
@@ -35,7 +43,7 @@
         "amount": 0.005
     }
     ```
-    - POST : http://localhost:{config.port}/v1/wallet/sendEthWithPk require rawBody with addressList and amount : to send ether with Private Key
+    - POST : /v1/wallet/sendEthWithPk require body with addressList and amount : to send ether with Private Key
     ```js
     { 
         "addressList": ["0xF092765161d6a81599983987105E72fD084c2fe5", "0xc9181293bA18A023dEd8Bf53B54C0A9c70597063"],
