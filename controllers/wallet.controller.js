@@ -19,11 +19,10 @@ const Wallet = {
     },
     sendEther: async ctx => {
         try {
-            let { keystore, password, addressList, amount } = ctx.request.body 
-            if(!keystore) keystore = config.keystore
-            if(!password) password = config.password
-            if(!amount) amount = 0.0005123
-            if(!Array.isArray(addressList)) addressList = [addressList]
+            const keystore = ctx.request.body.keystore ? ctx.request.body.keystore : config.keystore
+            const password = ctx.request.body.password ? ctx.request.body.password : config.password
+            const addressList = Array.isArray(ctx.request.body.addressList) ? ctx.request.body.addressList : [ ctx.request.body.addressList ]
+            const amount = ctx.request.body.amount ? ctx.request.body.amount : 0.0005123 
             const decryptedAccount = web3.eth.accounts.decrypt(keystore, password)
             const gasPrice = await getCurrentGasPrice(true)
             const nonce = await web3.eth.getTransactionCount(decryptedAccount.address)
@@ -65,10 +64,9 @@ const Wallet = {
     },
     sendEtherWithPk: async ctx => {
         try {
-            let { addressList, amount } = ctx.request.body
-            if(!Array.isArray(addressList)) addressList = [addressList]
-            if(!amount) amount = 0.0005123
-            const privateKey = `0x${config.privateKey}`
+            const addressList = Array.isArray(ctx.request.body.addressList) ? ctx.request.body.addressList : [ ctx.request.body.addressList ]
+            const amount = ctx.request.body.amount ? ctx.request.body.amount : 0.0005123 
+            const privateKey = ctx.request.body.privateKey ? ctx.request.body.privateKey : `0x${config.privateKey}`
             const decryptedAccount = await web3.eth.accounts.privateKeyToAccount(privateKey)
             const gasPrice = await getCurrentGasPrice(true)
             const nonce = await web3.eth.getTransactionCount(decryptedAccount.address)

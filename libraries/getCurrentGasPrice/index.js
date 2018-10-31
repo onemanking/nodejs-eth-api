@@ -12,7 +12,9 @@ const getCurrentGasPrice = async isParseToWei => {
                     medium: utils.toWei((response.data.average / 10).toString(), 'gwei'),
                     high: utils.toWei((response.data.fast / 10).toString(), 'gwei')
                 }
-    console.log(`Current ETH Gas Prices (in GWEI):`)
+
+    const unit = isParseToWei ? 'WEI' : 'GWEI'
+    console.log(`Current ETH Gas Prices (in ${unit}):`)
     console.log(`Low: ${prices.low} (transaction completes in < 30 minutes)`)
     console.log(`Standard: ${prices.medium} (transaction completes in < 5 minutes)`)
     console.log(`Fast: ${prices.high} (transaction completes in < 2 minutes)`)
