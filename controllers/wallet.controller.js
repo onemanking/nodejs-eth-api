@@ -66,7 +66,7 @@ const Wallet = {
         try {
             const addressList = Array.isArray(ctx.request.body.addressList) ? ctx.request.body.addressList : [ ctx.request.body.addressList ]
             const amount = ctx.request.body.amount ? ctx.request.body.amount : 0.0005123 
-            const privateKey = ctx.request.body.privateKey ? ctx.request.body.privateKey : `0x${config.privateKey}`
+            const privateKey = ctx.request.body.privateKey ? `0x${ctx.request.body.privateKey}` : `0x${config.privateKey}`
             const decryptedAccount = await web3.eth.accounts.privateKeyToAccount(privateKey)
             const gasPrice = await getCurrentGasPrice(true)
             const nonce = await web3.eth.getTransactionCount(decryptedAccount.address)
