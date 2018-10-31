@@ -1,28 +1,9 @@
 import config from '../config'
 import Web3 from 'web3'
-import axios from 'axios'
+import getCurrentGasPrice from '../libraries/getCurrentGasPrice'
 
 const networkToUse = `https://${config.network}.infura.io/v3/${config.apiKey}`
 const web3 = new Web3(new Web3.providers.HttpProvider(networkToUse))
-
-const getCurrentGasPrice = async isParseToWei => {
-    const response = await axios.get('https://ethgasstation.info/json/ethgasAPI.json')
-    const prices = !isParseToWei ? {
-                    low: response.data.safeLow / 10,
-                    medium: response.data.average / 10,
-                    high: response.data.fast / 10
-                } : {
-                    low: web3.utils.toWei((response.data.safeLow / 10).toString(), 'gwei'),
-                    medium: web3.utils.toWei((response.data.average / 10).toString(), 'gwei'),
-                    high: web3.utils.toWei((response.data.fast / 10).toString(), 'gwei')
-                }
-    console.log(`Current ETH Gas Prices (in GWEI):`)
-    console.log(`Low: ${prices.low} (transaction completes in < 30 minutes)`)
-    console.log(`Standard: ${prices.medium} (transaction completes in < 5 minutes)`)
-    console.log(`Fast: ${prices.high} (transaction completes in < 2 minutes)`)
-
-    return prices
-}
 
 const Wallet = {
     getBalance: async ctx => {
@@ -35,11 +16,6 @@ const Wallet = {
             ctx.status = 500
             ctx.message = `Cannot get wallet balance : ${e}` 
         }
-    },
-    getGasPrice: async ctx => {
-        const gasPrice = await getCurrentGasPrice()
-
-        ctx.body = gasPrice
     },
     sendEther: async ctx => {
         try {
