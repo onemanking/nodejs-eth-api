@@ -43,9 +43,10 @@
         "amount": 0.005
     }
     ```
-    - POST : /v1/wallet/sendEthWithPk require body with addressList and amount : to send ether with Private Key
+    - POST : /v1/wallet/sendEthWithPk require body with privateKey, addressList and amount : to send ether with Private Key
     ```js
     { 
+        "privateKey": "4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318"
         "addressList": ["0xF092765161d6a81599983987105E72fD084c2fe5", "0xc9181293bA18A023dEd8Bf53B54C0A9c70597063"],
         "amount": 0.005
     }
